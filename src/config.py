@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from typing import Annotated
 import os
 
@@ -39,7 +39,7 @@ class TrainConfig(BaseModel):
 
     # Training schedule
     warmup_steps: int = 100
-    max_iters: Annotated[int, Field(gt=warmup_steps)] = 20000
+    max_iters: int = 20000
     eval_iters: int = 500
     eval_interval: int = 500
 
@@ -49,3 +49,10 @@ class TrainConfig(BaseModel):
 
     # System
     seed: int = 42
+
+
+    @model_validator(mode="after")
+    def check_iters(self):
+        if self.max_iters <= self.warmup_steps:
+            raise ValueError("max_iters must be greater than warmup_steps")
+        return self

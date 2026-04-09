@@ -13,6 +13,7 @@ def test_training_runs():
     )
 
     train_config = TrainConfig(
+        warmup_steps=1,
         max_iters=2,
         eval_interval=1,
         batch_size=2
