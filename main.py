@@ -24,6 +24,7 @@ def parse_args():
     # Training params
     train_parser.add_argument("--lr", type=float, default=1e-4, help="Learning rate")
     train_parser.add_argument("--batch_size", type=int, default=32, help="Batch size")
+    train_parser.add_argument("--context_window", type=int, default=128, help="Block size")
     train_parser.add_argument("--max_iters", type=int, default=20000, help="Maximum training iterations")
     train_parser.add_argument("--eval_interval", type=int, default=500, help="Evaluation interval")
 
@@ -58,6 +59,7 @@ def main():
     # Load configs
     # -----------------------------
     model_config = GPTConfig(
+        block_size=args.context_window,
         n_layer=args.n_layer,
         n_head=args.n_head,
         n_embd=args.n_embd,

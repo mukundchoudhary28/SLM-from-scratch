@@ -11,7 +11,6 @@ from datasets import load_dataset
 DATA_DIR = "data"
 TOKENIZER_NAME = "gpt2"
 
-
 # -----------------------------
 # Load dataset
 # -----------------------------
@@ -120,10 +119,3 @@ def run_pipeline(subset: bool = True, num_proc: int = 1):
         write_bin_file(dset, split)
 
     print("Done ✅")
-
-
-# -----------------------------
-# Entry point
-# -----------------------------
-# if __name__ == "__main__":
-#     run_pipeline(subset=True, num_proc=1)

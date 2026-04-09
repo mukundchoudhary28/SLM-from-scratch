@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import Annotated
 import os
 
 # -----------------------------
@@ -37,8 +38,8 @@ class TrainConfig(BaseModel):
     beta2: float = 0.95
 
     # Training schedule
-    max_iters: int = 20000
-    warmup_steps: int = 1000
+    warmup_steps: int = 100
+    max_iters: Annotated[int, Field(gt=warmup_steps)] = 20000
     eval_iters: int = 500
     eval_interval: int = 500
 
